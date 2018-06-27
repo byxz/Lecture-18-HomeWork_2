@@ -8,7 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		0475703F20E00E5D00C79F32 /* Global.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0475703E20E00E5D00C79F32 /* Global.swift */; };
-		0475704120E00EDC00C79F32 /* NetWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0475704020E00EDC00C79F32 /* NetWorker.swift */; };
+		0475704120E00EDC00C79F32 /* APIWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0475704020E00EDC00C79F32 /* APIWorker.swift */; };
 		0475704320E00EF200C79F32 /* WorldCupsData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0475704220E00EF200C79F32 /* WorldCupsData.swift */; };
 		04DB3D3020DC06FD00631219 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04DB3D2F20DC06FD00631219 /* AppDelegate.swift */; };
 		04DB3D3220DC06FD00631219 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04DB3D3120DC06FD00631219 /* ViewController.swift */; };
@@ -19,7 +19,7 @@
 
 /* Begin PBXFileReference section */
 		0475703E20E00E5D00C79F32 /* Global.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Global.swift; sourceTree = "<group>"; };
-		0475704020E00EDC00C79F32 /* NetWorker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetWorker.swift; sourceTree = "<group>"; };
+		0475704020E00EDC00C79F32 /* APIWorker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIWorker.swift; sourceTree = "<group>"; };
 		0475704220E00EF200C79F32 /* WorldCupsData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorldCupsData.swift; sourceTree = "<group>"; };
 		04DB3D2C20DC06FD00631219 /* url.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = url.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		04DB3D2F20DC06FD00631219 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -63,7 +63,7 @@
 				04DB3D2F20DC06FD00631219 /* AppDelegate.swift */,
 				0475703E20E00E5D00C79F32 /* Global.swift */,
 				04DB3D3120DC06FD00631219 /* ViewController.swift */,
-				0475704020E00EDC00C79F32 /* NetWorker.swift */,
+				0475704020E00EDC00C79F32 /* APIWorker.swift */,
 				0475704220E00EF200C79F32 /* WorldCupsData.swift */,
 				04DB3D3320DC06FD00631219 /* Main.storyboard */,
 				04DB3D3620DC06FF00631219 /* Assets.xcassets */,
@@ -147,7 +147,7 @@
 				04DB3D3220DC06FD00631219 /* ViewController.swift in Sources */,
 				04DB3D3020DC06FD00631219 /* AppDelegate.swift in Sources */,
 				0475703F20E00E5D00C79F32 /* Global.swift in Sources */,
-				0475704120E00EDC00C79F32 /* NetWorker.swift in Sources */,
+				0475704120E00EDC00C79F32 /* APIWorker.swift in Sources */,
 				0475704320E00EF200C79F32 /* WorldCupsData.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

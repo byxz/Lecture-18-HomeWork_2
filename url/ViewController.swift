@@ -12,7 +12,7 @@ class ViewController: UIViewController {
 
     @IBOutlet var textView: UITextView!
     
-    private let worker = NetWorker()
+    private let worker = APIWorker()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -24,8 +24,41 @@ class ViewController: UIViewController {
         worker.сancel()
     }
     
+    private func showAlert(with error: Error) {
+        let alertController = UIAlertController(title: "Error", message: error.localizedDescription, preferredStyle: .alert)
+        
+        let action = UIAlertAction(title: "OK", style: .cancel)
+        alertController.addAction(action)
+        
+        show(alertController, sender: nil)
+    }
+    
+    
+    private func advancedLoad() {
+        UIApplication.shared.isNetworkActivityIndicatorVisible = true
+        worker.loadData2 { (WorkCupsData, error) in
+            
+            if let error = error {
+                DispatchQueue.main.async {
+                    self.showAlert(with: error)
+                }
+                return
+            }
+            
+            guard let WorkCupsData = WorkCupsData else { return }
+            
+            print(WorkCupsData.count)
+            
+            DispatchQueue.main.async {
+                self.textView.text = "Flag \(WorkCupsData.count)"
+            }
+        }
+    }
+
+
+    /*
     func advancedLoad() {
-        let myCompletionAfterLoading: (Data?, Error?) -> Void = { [weak self] data, error in
+        let myCompletionAfterLoading: ([WorldCupsData]?, Error?) -> Void = { [weak self] data, error in
             if let error = error {
                 print(error)
                 return
@@ -33,16 +66,27 @@ class ViewController: UIViewController {
             
             guard let data = data else { return }
             guard let anyDict = try? JSONSerialization.jsonObject(with: data, options: []) else { return }
-            guard let dict = anyDict as? [String: String] else { return }
+    
+            //let anyDict = try? JSONDecoder().decode([WorldCupsData].self, from: data)
+            print ("any", anyDict)
+            if anyDict is [String : Any] {
+                print("It's a dict")
+            }
+            let dict = anyDict as? [String : Any]
+            let worldCupsData = WorldCupsData(dict: dict!)
             
-            let worldCupsData = WorldCupsData(dict: dict)
+            
+        
+            //let worldCupsData = WorldCupsData(dict: dict)
             DispatchQueue.main.async {
-                self?.textView.text = "Date " + worldCupsData.dateString
+                self?.textView.text = "Flag " + (worldCupsData.tri)!
             }
         }
         
-        worker.loadData(completion: myCompletionAfterLoading)
+        worker.loadData2(completion: myCompletionAfterLoading)
     }
+ 
+ 
     
     func primitiveApproach() {
         let url = Global.url
@@ -59,5 +103,6 @@ class ViewController: UIViewController {
             }
         }
     }
+ */
 }
 
