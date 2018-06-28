@@ -47,13 +47,9 @@ class ViewController: UIViewController {
             
             guard let workCupsData = WorkCupsData else { return }
             
-            print(workCupsData.count)
-           
-            for _ in workCupsData {
-                print("hello")
-            }
             
             DispatchQueue.main.async {
+                
                 self.textView.text = "\(workCupsData)"
             }
         }
