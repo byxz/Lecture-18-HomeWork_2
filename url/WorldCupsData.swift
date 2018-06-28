@@ -11,7 +11,8 @@ import Foundation
 struct WorldCupsData {
     //let homeTeam: String
     //let group: String
-    let tri: String?
+    let group: String?
+    let homeTeam: String?
     //let flag: String?
     //let full: String?
     /*
@@ -28,7 +29,8 @@ struct WorldCupsData {
         //group = dict["group"] as? String ?? ""
         //visitantTeam = dict["visitant_team"] as? String ?? ""
         //dateString = dict["date"] as? String ?? ""
-        tri = dict["tri"] as? String ?? ""
+        group = dict["Group A"] as? String ?? ""
+        homeTeam = dict["home_team"] as? String ?? ""
     }
  
 }

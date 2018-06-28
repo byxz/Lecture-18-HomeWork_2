@@ -18,11 +18,13 @@ class APIWorker {
     
     enum Keys {
         static let serviceKey = "LsHoEdcE1pmshD6kwQzdL2S4CpN0p1yJltgjsnA9fyaRGXs3Fj"
+        static let serviceKeyTwo = "1rksEaJHXjmshr9Os90W2v0joaavp1P1XHXjsn9EjaGpGlgcaM"
+        
     }
     
     
     
-    func loadData2(completion: @escaping ([WorldCupsData]?, Error?) -> Void) {
+    func loadData(completion: @escaping ([WorldCupsData]?, Error?) -> Void) {
         
         //Необходимо сделать проверку
         let url = URL(string: URLs.mainUrl)!
@@ -30,7 +32,7 @@ class APIWorker {
         var request = URLRequest(url: url)
         
         request.httpMethod = "GET"
-        request.setValue(Keys.serviceKey, forHTTPHeaderField: "X-Mashape-Key")
+        request.setValue(Keys.serviceKeyTwo, forHTTPHeaderField: "X-Mashape-Key")
         
         let task = URLSession.shared.dataTask(with: request) { data, _, error in
             if let error = error {
@@ -54,8 +56,10 @@ class APIWorker {
 
             }
             
-            print(data)
+            let test = dict.compactMap { WorldCupsData(dict: $0 as! [String : Any]) }
             
+            print(test)
+            completion(test, nil)
             
             //let team = (first as AnyObject).compactMap { WorldCupsData(dict: $0) }
             //let team = homeTeam.compactMap { WorldCupsData(dict: $0) }
