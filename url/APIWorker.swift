@@ -24,8 +24,7 @@ class APIWorker {
     
     
     
-    func loadData(completion: @escaping ([WorldCupsData1]?, Error?) -> Void) {
-        
+    func loadData(completion: @escaping ([WorldCupsData]?, Error?) -> Void) {
         //Необходимо сделать проверку
         let url = URL(string: URLs.mainUrl)!
         
@@ -40,60 +39,42 @@ class APIWorker {
                 return
             }
             
-            //  Стопор полнейший не пойму как json раскрывать правлиьно guardom
             guard let data = data else { return }
             guard let jsonObject = try? JSONSerialization.jsonObject(with: data, options: []) else { return }
-            print("========1")
-            //print(jsonObject)
-            print("========1")
-            guard let dict = jsonObject as? [[String:Any]] else { return }
-            print("========2")
-            print(dict)
-            print("========2")
-            guard let type = dict["tournament_type"] as? [String:Any] else { return }
-            for dataPoint in dict {
-                if let weatherObject = try? WorldCupsData1(json: dataPoint) {
-                    print(weatherObject)
-                }
+            guard let dict = jsonObject as? [[String:Any]] else {
+                completion(nil, nil)
+                print("Error deserializing JSON: \(String(describing: error))")
+                return
             }
             
-         
-            
-            //guard let homeTeamDict = dict["String: Any"] as? [String: Any] else {
-        
-                ////completion(nil, nil)
-                //print("Error deserializing JSON: \(String(describing: error))")
-                //return
-            
-            //print("========3")
-            //print(homeTeamDict)
-            //print("========3")
-            //let homeTeam = jsonObject!["home_team"] as? [String: Any],
-            //let name = homeTeam["name"] as? [[String: Any]]
-            //let dict = jsonObject as? [Any]
+            //Хороший метод
+            var arrayTest: [String: Any] = [:]
+            for i in dict {
+                arrayTest = i
+            }
+            print(arrayTest.count)
+            print(dict.count)
             
             
-        
-           // let triStrings = homeTeamDict.compactMap { WorldCupsData1(json: $0)}
-            //completion(triStrings, nil)
+            let event = dict[0]
             
+            //Просто тест
+            let stadium = event["stadium"]
+            print(stadium ?? "ERROR stadium!")
+            let time = event["time"]
+            print(time ?? "ERROR time!")
+            let year = event["year"]
+            print(year ?? "ERROR year!")
+            
+            //Что-то костыльно очень.
+            let a = WorldCupsData(json: event)
+            let b = [a]
+            print(a ?? "xz")
+            completion(b as? [WorldCupsData], nil)
         }
-        //print(homeTeam)
-        
-        //let nameTeam = name.compactMap { WorldCupsData1(json: $0 ) }
-        
-        //print(nameTeam)
-        //completion(nameTeam, nil)
-        
-        //let team = (first as AnyObject).compactMap { WorldCupsData(dict: $0) }
-        //let team = homeTeam.compactMap { WorldCupsData(dict: $0) }
-        //completion(team, nil)
-        
         
         task.resume()
     }
-    
-    
     
     func сancel() {
         task?.cancel()

@@ -8,14 +8,23 @@
 
 import Foundation
 
-struct WorldCupsData1 {
+struct WorldCupsData {
     //let homeTeam: String
     //let group: String
     //let group: String?
     //let homeTeam: String?
-    let tri: String?
-    let flag: String?
-    let full: String?
+    let stadium: String?
+    let year: String?
+    let time: String?
+    
+    //let startTime: String?
+    //let visitantTeam: String?
+    
+    //let tri: String?
+    //let flag: String?
+    //let full: String?
+    
+    
     
     
     enum SerializationError:Error {
@@ -24,12 +33,12 @@ struct WorldCupsData1 {
     }
     
     
-    init(json:[String:Any]) {
-        tri = json["tri"] as? String ?? ""
-        flag = json["flag"] as? String ?? ""
-        full = json["full"] as? String ?? ""
+    init?(json:[String: Any]) {
         
-  
+        stadium = json["stadium"] as? String ?? ""
+        year = json["year"] as? String ?? ""
+        time = json["time"] as? String ?? ""
+
     }
     
     /*

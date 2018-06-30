@@ -11,6 +11,9 @@ import UIKit
 class ViewController: UIViewController {
 
     @IBOutlet var textView: UITextView!
+    @IBOutlet var full: UILabel!
+    @IBOutlet var tri: UILabel!
+    @IBOutlet var flag: UILabel!
     
     private let worker = APIWorker()
     
@@ -51,6 +54,7 @@ class ViewController: UIViewController {
             DispatchQueue.main.async {
                 
                 self.textView.text = "\(workCupsData)"
+                
             }
         }
     }
