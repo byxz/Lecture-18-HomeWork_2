@@ -41,36 +41,96 @@ class APIWorker {
             
             guard let data = data else { return }
             guard let jsonObject = try? JSONSerialization.jsonObject(with: data, options: []) else { return }
-            guard let dict = jsonObject as? [[String:Any]] else {
+            guard let arr = jsonObject as? [[String:Any]] else {
                 completion(nil, nil)
                 print("Error deserializing JSON: \(String(describing: error))")
                 return
             }
+
             
-            //Хороший метод
-            var arrayTest: [String: Any] = [:]
-            for i in dict {
-                arrayTest = i
+            struct Name {
+                let flag: String
+                let full: String
+                let tri: String
             }
-            print(arrayTest.count)
-            print(dict.count)
+            
+            struct HomeTeam {
+                let name: Name
+            }
+            
+            struct VisitantTeam {
+                let name: Name
+            }
+            
+            struct Location {
+                let city: String
+                let country: String
+            }
             
             
-            let event = dict[0]
+            struct Game {
+                let date: String
+                let group: String
+                let homeTeam: HomeTeam
+                let location: Location
+                let matchId: String
+                let numMatch: String
+                let stadium: String
+                let startTime: String
+                let time: String
+                let timeZone: String
+                let tournamentName: String
+                let tournamentType: String
+                let visitantTeam: VisitantTeam
+                let year: String
+            }
+
+            var games = [Game]()
             
-            //Просто тест
-            let stadium = event["stadium"]
-            print(stadium ?? "ERROR stadium!")
-            let time = event["time"]
-            print(time ?? "ERROR time!")
-            let year = event["year"]
-            print(year ?? "ERROR year!")
+            for dict in arr {
+                let date = dict["date"] as? String ?? ""
+                let group = dict["group"] as? String ?? ""
+                let matchId = dict["match_id"] as? String ?? ""
+                let numMatch = dict["num_match"] as? String ?? ""
+                let stadium = dict["stadium"] as? String ?? ""
+                let startTime = dict["start_time"] as? String ?? ""
+                let time = dict["time"] as? String ?? ""
+                let timeZone = dict["time_zone"] as? String ?? ""
+                let tournamentName = dict["tournament_name"] as? String ?? ""
+                let tournamentType = dict["tournament_type"] as? String ?? ""
+                let year = dict["year"] as? String ?? ""
+                
+                let homeTeam = dict["home_team"] as? [String: Any]
+                let homeTeamName = homeTeam!["name"] as? [String: Any]
+                let homeTeamNameFlag = homeTeamName!["flag"] as? String ?? ""
+                let homeTeamNameFull = homeTeamName!["full"] as? String ?? ""
+                let homeTeamNameTri = homeTeamName!["tri"] as? String ?? ""
+                let homeTeamNameStruct = Name(flag: homeTeamNameFlag, full: homeTeamNameFull, tri: homeTeamNameTri)
+                let homeTeamStruct = HomeTeam(name: homeTeamNameStruct)
+                
+                let visitantTeam = dict["visitant_team"] as? [String: Any]
+                let visitantTeamName = visitantTeam!["name"] as? [String: Any]
+                let visitantTeamNameFlag = visitantTeamName!["flag"] as? String ?? ""
+                let visitantTeamNameFull = visitantTeamName!["full"] as? String ?? ""
+                let visitantTeamNameTri = visitantTeamName!["tri"] as? String ?? ""
+                let visitantTeamNameStruct = Name(flag: visitantTeamNameFlag, full: visitantTeamNameFull, tri: visitantTeamNameTri)
+                let visitantTeamStruct = VisitantTeam(name: visitantTeamNameStruct)
+                
+                let location = dict["location"] as? [String: Any]
+                let city = location!["city"] as? String ?? ""
+                let country = location!["country"] as? String ?? ""
+                let locationStruct = Location(city: city, country: country)
+                
+                
+                
+                let game = Game(date: date, group: group, homeTeam: homeTeamStruct, location: locationStruct, matchId: matchId, numMatch: numMatch, stadium: stadium, startTime: startTime, time: time, timeZone: timeZone, tournamentName: tournamentName, tournamentType: tournamentType, visitantTeam: visitantTeamStruct, year: year)
+                games.append(game)
+            }
             
-            //Что-то костыльно очень.
-            let a = WorldCupsData(json: event)
-            let b = [a]
-            print(a ?? "xz")
-            completion(b as? [WorldCupsData], nil)
+            
+            print(games)
+            
+            completion(nil, nil)
         }
         
         task.resume()
