@@ -22,11 +22,18 @@ class APIWorker {
         
     }
     
+    enum SerializationError:Error {
+        case missing(String)
+        case invalid(String, Any)
+    }
     
-    
-    func loadData(completion: @escaping ([WorldCupsData]?, Error?) -> Void) {
-        //Необходимо сделать проверку
-        let url = URL(string: URLs.mainUrl)!
+    func loadData(completion: @escaping ([Game]?, Error?) -> Void) {
+        
+        guard let url = URL(string: URLs.mainUrl) else {
+            print("URL missing ")
+            completion(nil, SerializationError.missing("MISSING!!"))
+            return
+        }
         
         var request = URLRequest(url: url)
         
@@ -46,45 +53,7 @@ class APIWorker {
                 print("Error deserializing JSON: \(String(describing: error))")
                 return
             }
-
             
-            struct Name {
-                let flag: String
-                let full: String
-                let tri: String
-            }
-            
-            struct HomeTeam {
-                let name: Name
-            }
-            
-            struct VisitantTeam {
-                let name: Name
-            }
-            
-            struct Location {
-                let city: String
-                let country: String
-            }
-            
-            
-            struct Game {
-                let date: String
-                let group: String
-                let homeTeam: HomeTeam
-                let location: Location
-                let matchId: String
-                let numMatch: String
-                let stadium: String
-                let startTime: String
-                let time: String
-                let timeZone: String
-                let tournamentName: String
-                let tournamentType: String
-                let visitantTeam: VisitantTeam
-                let year: String
-            }
-
             var games = [Game]()
             
             for dict in arr {
@@ -121,16 +90,11 @@ class APIWorker {
                 let country = location!["country"] as? String ?? ""
                 let locationStruct = Location(city: city, country: country)
                 
-                
-                
                 let game = Game(date: date, group: group, homeTeam: homeTeamStruct, location: locationStruct, matchId: matchId, numMatch: numMatch, stadium: stadium, startTime: startTime, time: time, timeZone: timeZone, tournamentName: tournamentName, tournamentType: tournamentType, visitantTeam: visitantTeamStruct, year: year)
                 games.append(game)
             }
             
-            
-            print(games)
-            
-            completion(nil, nil)
+            completion(games, nil)
         }
         
         task.resume()
@@ -139,4 +103,6 @@ class APIWorker {
     func сancel() {
         task?.cancel()
     }
+
+    
 }
