@@ -14,7 +14,6 @@
 		0415296D20ED3F2A0015AB58 /* Location.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0415296C20ED3F2A0015AB58 /* Location.swift */; };
 		0415296F20ED3F740015AB58 /* Game.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0415296E20ED3F740015AB58 /* Game.swift */; };
 		0475704120E00EDC00C79F32 /* APIWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0475704020E00EDC00C79F32 /* APIWorker.swift */; };
-		0475704320E00EF200C79F32 /* WorldCupsData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0475704220E00EF200C79F32 /* WorldCupsData.swift */; };
 		04DB3D3020DC06FD00631219 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04DB3D2F20DC06FD00631219 /* AppDelegate.swift */; };
 		04DB3D3220DC06FD00631219 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04DB3D3120DC06FD00631219 /* ViewController.swift */; };
 		04DB3D3520DC06FD00631219 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 04DB3D3320DC06FD00631219 /* Main.storyboard */; };
@@ -30,7 +29,6 @@
 		0415296C20ED3F2A0015AB58 /* Location.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Location.swift; sourceTree = "<group>"; };
 		0415296E20ED3F740015AB58 /* Game.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Game.swift; sourceTree = "<group>"; };
 		0475704020E00EDC00C79F32 /* APIWorker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIWorker.swift; sourceTree = "<group>"; };
-		0475704220E00EF200C79F32 /* WorldCupsData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorldCupsData.swift; sourceTree = "<group>"; };
 		04DB3D2C20DC06FD00631219 /* url.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = url.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		04DB3D2F20DC06FD00631219 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		04DB3D3120DC06FD00631219 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -87,7 +85,6 @@
 				0415296320ED39E60015AB58 /* CustomeCell.swift */,
 				0475704020E00EDC00C79F32 /* APIWorker.swift */,
 				0415296720ED3E820015AB58 /* Structs */,
-				0475704220E00EF200C79F32 /* WorldCupsData.swift */,
 				04DB3D3320DC06FD00631219 /* Main.storyboard */,
 				04DB3D3620DC06FF00631219 /* Assets.xcassets */,
 				04DB3D3820DC06FF00631219 /* LaunchScreen.storyboard */,
@@ -176,7 +173,6 @@
 				0475704120E00EDC00C79F32 /* APIWorker.swift in Sources */,
 				0415296620ED3E7A0015AB58 /* HomeTeam.swift in Sources */,
 				0415296920ED3EDE0015AB58 /* Name.swift in Sources */,
-				0475704320E00EF200C79F32 /* WorldCupsData.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

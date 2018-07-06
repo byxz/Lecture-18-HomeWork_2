@@ -56,6 +56,7 @@ class APIWorker {
             
             var games = [Game]()
             
+            
             for dict in arr {
                 let date = dict["date"] as? String ?? ""
                 let group = dict["group"] as? String ?? ""

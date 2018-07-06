@@ -10,24 +10,26 @@ import UIKit
 
 class ViewController: UIViewController {
     
+    @IBOutlet var tableView: UITableView!
     @IBOutlet var textView: UITextView!
+    
+    @IBAction func reloadButton(_ sender: Any) {
+        tableView.reloadData()
+    }
+    
     private let worker = APIWorker()
     
-    
-    //Как павильно получить массив и с ним адальше работать?
     var array:[Game] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
         advancedLoad()
-        
     }
     
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
         worker.сancel()
         UIApplication.shared.isNetworkActivityIndicatorVisible = false
-        
     }
     
     private func showAlert(with error: Error) {
@@ -53,10 +55,12 @@ class ViewController: UIViewController {
             
             guard let games = games else { return }
             
+            
             DispatchQueue.main.async {
                 
                 self.textView.text = "\(games)"
                 self.array = games
+                self.reloadData()
             }
         }
         
@@ -66,25 +70,26 @@ class ViewController: UIViewController {
 
 extension ViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-       //Заменить на число элементов в массиве
-        return 48
-        
+        return array.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath) as! CustomeCell
         
-        //first засенить на IndexPath массива
+        cell.groupLabel.text = array[indexPath.row].group
         
-        cell.triOfHomeTeamLabel.text = array.first?.homeTeam.name.tri
-        cell.fullOfHomeTeamLabel.text = array.first?.homeTeam.name.full
+        cell.triOfHomeTeamLabel.text = array[indexPath.row].homeTeam.name.tri
+        cell.fullOfHomeTeamLabel.text = array[indexPath.row].homeTeam.name.full
         
-        cell.triOfVisitTeamLabel.text = array.first?.visitantTeam.name.tri
-        cell.fullOfVisitTeamLabel.text = array.first?.visitantTeam.name.full
+        cell.triOfVisitTeamLabel.text = array[indexPath.row].visitantTeam.name.tri
+        cell.fullOfVisitTeamLabel.text = array[indexPath.row].visitantTeam.name.full
         
         return cell
     }
     
+    func reloadData() {
+        tableView.reloadData()
+    }
     
 }
 
